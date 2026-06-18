@@ -1,3 +1,4 @@
+import 'package:curved_navbar/widgets/curved_bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/favorite_page.dart';
@@ -25,11 +26,22 @@ class _MainNavigationState extends State<MainNavigation> {
     NotificationPage(),
   ];
 
+  void onItemTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
        backgroundColor: const Color(0xFFFFFFFF),
-       
+       extendBody: true,
+       body: pages[currentIndex],
+        bottomNavigationBar: CurvedBottomNavBar(
+          currentIndex: currentIndex,
+          onItemTapped: onItemTapped,
+        ),  
     );
   }
 }
