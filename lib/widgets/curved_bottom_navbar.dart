@@ -1,83 +1,52 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class CurvedBottomNavBar extends StatelessWidget {
-
   final int currentIndex;
-  final Function(int) onItemTapped;
+  final ValueChanged<int> onTap;
 
   const CurvedBottomNavBar({
     super.key,
     required this.currentIndex,
-    required this.onItemTapped
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-
-    final icons = [
-      Icons.home,
-      Icons.search,
-      Icons.favorite,
-      Icons.person,
-      Icons.notifications
-    ];
-
-    final labels = [
-      'Home',
-      'Search',
-      'Favorite',
-      'Profile',
-      'Notification'
-    ];
-
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: const Color(0xFF792CA2),
-            borderRadius: BorderRadius.circular(35),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 12,
-                offset: Offset(0, 5),
-              )
-            ]
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(
-              icons.length,
-              (index) {
-                final isActive = currentIndex == index;
-                return GestureDetector(
-                  onTap: () => onItemTapped(index),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        icons[index],
-                        color: isActive ? Colors.white : Colors.white54,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        labels[index],
-                        style: TextStyle(
-                          color: isActive ? Colors.white : Colors.white54,
-                          fontSize: 12,
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              }
-              )
-            ),
+    return CurvedNavigationBar(
+      items: <Widget>[
+        Icon(
+          Icons.home,
+          size: 30,
+          color: currentIndex == 0 ? Colors.white : Colors.black,
         ),
+        Icon(
+          Icons.search,
+          size: 30,
+          color: currentIndex == 1 ? Colors.white : Colors.black,
         ),
+        Icon(
+          Icons.favorite,
+          size: 30,
+          color: currentIndex == 2 ? Colors.white : Colors.black,
+        ),
+        Icon(
+          Icons.notifications,
+          size: 30,
+          color: currentIndex == 3 ? Colors.white : Colors.black,
+        ),
+        Icon(
+          Icons.person,
+          size: 30,
+          color: currentIndex == 4 ? Colors.white : Colors.black,
+        )
+      ],
+      onTap: onTap,
+      backgroundColor: Colors.transparent,
+      color: const Color(0XFF4274D9),
+      buttonBackgroundColor: const Color(0XFF4274D9),
+      height: 75,
+      index: currentIndex,
     );
-
   }
 }
